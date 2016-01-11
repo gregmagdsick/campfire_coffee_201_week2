@@ -9,7 +9,7 @@ var pike = {
   cupCust: 1.2,
   lbCust: 3.7,
   custHour: function(minHr, maxHr) {
-    return Math.floor(Math.random() * (this.maxHr - this.minHr +1)) + this.minHr
+    return Math.floor(Math.random() * (maxHr - minHr +1)) + minHr;
   },
 
 }
@@ -19,19 +19,17 @@ var h2El = document.createElement('h2');
 h2El.textContent = pike.storeName;
 document.body.appendChild(h2El);
 
+for (i = 0; i < pike.hours.length; i ++){
+  //calculate needed stats for one hour
+  pike.customer = pike.custHour(pike.minHr, pike.maxHr);
+  pike.cupHr = pike.customer * pike.cupCust; // cups of coffee sold per hour
+  pike.beanHr = pike.customer * pike.lbCust; // lbs of beans sold per hour
+  pike.lbsCupsHr = pike.cupHr / 20;
+  pike.totLbs = pike.beanHr + pike.lbsCupsHr; // total beans for this hour
 
-//calculate needed stats for one hour
-pike.customer = pike.custHour(pike.minHr, pike.maxHr); //
-console.log('pike.customer is ' + pike.customer);
-pike.cupHr = pike.customer * pike.cupCust; // cups of coffee sold per hour
-console.log('pike.cupHr is ' + pike.cupHr);
-pike.beanHr = pike.customer * pike.lbCust; // lbs of beans sold per hour
-console.log('pike.beanHr is ' + pike.beanHr)
-pike.lbsCupsHr = pike.cupHr / 20;
-console.log('pike.lbsCupsHr is ' + pike.lbsCupsHr);
-pike.totLbs = pike.beanHr + pike.lbsCupsHr; // total beans for this hour
-console.log('pike.totLbs is ' + pike.totLbs);
 
-var paragraphEl = document.createElement('p');
-paragraphEl.textContent = pike.hours[0] + ': ' + pike.totLbs.toFixed(1) + ' lbs [' + pike.customer.toFixed(1) + ' customers, ' + pike.cupHr.toFixed(1) + ' cups (' + pike.lbsCupsHr.toFixed(1) + ' lbs), ' + pike.beanHr.toFixed(1) + ' lbs to go]';
-document.body.appendChild(paragraphEl);
+  var paragraphEl = document.createElement('p');
+  paragraphEl.textContent = pike.hours[i] + ': ' + pike.totLbs.toFixed(1) + ' lbs [' + pike.customer.toFixed(1) + ' customers, ' + pike.cupHr.toFixed(1) + ' cups (' + pike.lbsCupsHr.toFixed(1) + ' lbs), ' + pike.beanHr.toFixed(1) + ' lbs to go]';
+  document.body.appendChild(paragraphEl);
+
+}
