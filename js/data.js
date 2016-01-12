@@ -1,7 +1,56 @@
 //my JS will go here//
 var allHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm']
 
+//Building my constructor
+var Store = function(storeName, minHr, maxHr, cupCust, lbCust){
+  this.storeName = storeName;
+  this.hours = allHours;
+  this.customerHours = [];
+  this.cupsEachHour = [];
+  this.beansEachHour = [];
+  this.minHr = minHr;
+  this.maxHr = maxHr;
+  this.cupCust = cupCust;
+  this.lbCust = lbCust;
+  this.dailyCups = 0;
+  this.dailyBeans = 0;
 
+  custHour = function() {
+    for (var i = 0; i < this.hours.length; i ++) {
+      this.customerHours[i] = Math.floor(Math.random() * (this.maxHr - this.minHr +1)) + this.minHr;
+    }
+  };
+  cupsPerHr = function() {
+    for (var i = 0; i < this.hours.length; i ++) {
+    this.cupsEachHour[i] = this.customerHours[i] * this.cupCust;
+    this.dailyCups += this.cupsEachHour[i];
+    this.dailyBeans += this.cupsEachHour[i]/20;
+  }
+};
+  beanHr = function() {
+    for (var i = 0; i < this.hours.length; i ++) {
+    this.beansEachHour[i] = this.customerHours[i] * this.lbCust;
+    this.dailyBeans += this.beansEachHour[i];
+  }
+};
+  populate = function() {
+    this.custHour();
+    this.cupsPerHr();
+    this.beanHr();
+
+//Creates Title Box for the list
+    var h2El = document.createElement('h2');
+    h2El.textContent = this.storeName;
+    document.body.appendChild(h2El);
+
+//Populate list to website
+    for (var i = 0; i < this.hours.length; i ++) {
+      var paragraphEl = document.createElement('p');
+      paragraphEl.textContent = this.hours[i] + ':' + this.beansEachHour[i].toFixed(1) + ' lbs [' + this.customerHours[i].toFixed(1) + ' customers, ' + this.cupsEachHour[i].toFixed(1) + ' cups (' + (this.cupsEachHour[i]/20).toFixed(1) + ' lbs), ' + this.beansEachHour[i].toFixed(1) + ' lbs to-go]'
+      document.body.appendChild(paragraphEl);
+    }
+  };
+};
 
 //building my pikeplace obect//
 var pike = {
@@ -52,13 +101,7 @@ var pike = {
       document.body.appendChild(paragraphEl);
     }
   },
-
-      // //populate to website
-      // var paragraphEl = document.createElement('p');
-      // paragraphEl.textContent = this.hours[j] + ': ' + this.totLbs.toFixed(1) + ' lbs [' + this.customerNumHr.toFixed(1) + ' customers, ' + this.cupHr.toFixed(1) + ' cups (' + this.lbsCupsHr.toFixed(1) + ' lbs), ' + this.beanHr.toFixed(1) + ' lbs to go]';
-      // document.body.appendChild(paragraphEl);
-
-      }
+};
 
 pike.populate();
 
