@@ -186,7 +186,7 @@ calculations = function(shopName){
     shopName.lbsCupsHr = shopName.cupHr / 20;
     shopName.totLbs = shopName.beanHr + shopName.lbsCupsHr; // total beans for this hour
 
-//populate to website
+    //populate to website
     var paragraphEl = document.createElement('p');
     paragraphEl.textContent = shopName.hours[j] + ': ' + shopName.totLbs.toFixed(1) + ' lbs [' + shopName.customerNumHr.toFixed(1) + ' customers, ' + shopName.cupHr.toFixed(1) + ' cups (' + shopName.lbsCupsHr.toFixed(1) + ' lbs), ' + shopName.beanHr.toFixed(1) + ' lbs to go]';
     document.body.appendChild(paragraphEl);
