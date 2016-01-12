@@ -9,10 +9,14 @@ var pike = {
   hours: allHours,
   customerHours: [],
   cupsEachHour: [],
+  beansEachHour: [],
   minHr: 14,
   maxHr: 55,
   cupCust: 1.2,
   lbCust: 3.7,
+  dailyCups: 0,
+  dailyBeans: 0,
+
   custHour: function() {
     for (var i = 0; i < this.hours.length; i ++) {
       this.customerHours[i] = Math.floor(Math.random() * (this.maxHr - this.minHr +1)) + this.minHr;
@@ -21,33 +25,49 @@ var pike = {
   cupsPerHr: function() {
     for (var i = 0; i < this.hours.length; i ++) {
     this.cupsEachHour[i] = this.customerHours[i] * this.cupCust;
+    this.dailyCups += this.cupsEachHour[i];
+    this.dailyBeans += this.cupsEachHour[i]/20;
   }
   },
   beanHr: function() {
-    return this.customerNumHr * this.lbCust;
-  },
-  lbsCupsHr: function() {
-    return this.cupHr / 20
-  },
-  totLbs: function() {
-    return this.beanHr + this.lbsCupsHr;
-  },
-  calculations: function() {
+    for (var i = 0; i < this.hours.length; i ++) {
+    this.beansEachHour[i] = this.customerHours[i] * this.lbCust;
+    this.dailyBeans += this.beansEachHour[i];
+  }
+},
+  populate: function() {
+    this.custHour();
+    this.cupsPerHr();
+    this.beanHr();
 
-      //populate to website
+//Creates Title Box for the list
+    var h2El = document.createElement('h2');
+    h2El.textContent = this.storeName;
+    document.body.appendChild(h2El);
+
+//Populate list to website
+    for (var i = 0; i < this.hours.length; i ++) {
       var paragraphEl = document.createElement('p');
-      paragraphEl.textContent = this.hours[j] + ': ' + this.totLbs.toFixed(1) + ' lbs [' + this.customerNumHr.toFixed(1) + ' customers, ' + this.cupHr.toFixed(1) + ' cups (' + this.lbsCupsHr.toFixed(1) + ' lbs), ' + this.beanHr.toFixed(1) + ' lbs to go]';
+      paragraphEl.textContent = this.hours[i] + ':' + this.beansEachHour[i].toFixed(1) + ' lbs [' + this.customerHours[i].toFixed(1) + ' customers, ' + this.cupsEachHour[i].toFixed(1) + ' cups (' + (this.cupsEachHour[i]/20).toFixed(1) + ' lbs), ' + this.beansEachHour[i].toFixed(1) + ' lbs to-go]'
       document.body.appendChild(paragraphEl);
+    }
+  },
+
+      // //populate to website
+      // var paragraphEl = document.createElement('p');
+      // paragraphEl.textContent = this.hours[j] + ': ' + this.totLbs.toFixed(1) + ' lbs [' + this.customerNumHr.toFixed(1) + ' customers, ' + this.cupHr.toFixed(1) + ' cups (' + this.lbsCupsHr.toFixed(1) + ' lbs), ' + this.beanHr.toFixed(1) + ' lbs to go]';
+      // document.body.appendChild(paragraphEl);
 
       }
 
-
-}
+pike.populate();
 
 pike.custHour();
 console.log(pike.customerHours);
 pike.cupsPerHr();
 console.log(pike.cupsEachHour);
+pike.beanHr();
+console.log(pike.beansEachHour);
 
 //create array of stores
 var stores = [pike, capHill, spl, slu, seaTac, website];
