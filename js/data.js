@@ -43,7 +43,23 @@ var capHill = {
   custHour: function(minHr, maxHr) {
     return Math.floor(Math.random() * (maxHr - minHr +1)) + minHr;
   },
+  customerNumHr: function() {
+    return this.custHour(this.minHr, this.maxHr);
+  },
+  cupHr: function() {
+    return this.customerNumHr * this.cupCust;
+  },
+  beanHr: function() {
+    return this.customerNumHr * this.lbCust;
+  },
+  lbsCupsHr: function() {
+    return this.cupHr / 20
+  },
+  totLbs: function() {
+    return this.beanHr + this.lbsCupsHr;
+  }
 }
+
 
 var spl = {
   storeName: 'Seattle Pike Place Market',
@@ -55,6 +71,21 @@ var spl = {
   custHour: function(minHr, maxHr) {
     return Math.floor(Math.random() * (maxHr - minHr +1)) + minHr;
   },
+  customerNumHr: function() {
+    return this.custHour(this.minHr, this.maxHr);
+  },
+  cupHr: function() {
+    return this.customerNumHr * this.cupCust;
+  },
+  beanHr: function() {
+    return this.customerNumHr * this.lbCust;
+  },
+  lbsCupsHr: function() {
+    return this.cupHr / 20
+  },
+  totLbs: function() {
+    return this.beanHr + this.lbsCupsHr;
+  }
 }
 
 var slu = {
@@ -67,7 +98,23 @@ var slu = {
   custHour: function(minHr, maxHr) {
     return Math.floor(Math.random() * (maxHr - minHr +1)) + minHr;
   },
+  customerNumHr: function() {
+    return this.custHour(this.minHr, this.maxHr);
+  },
+  cupHr: function() {
+    return this.customerNumHr * this.cupCust;
+  },
+  beanHr: function() {
+    return this.customerNumHr * this.lbCust;
+  },
+  lbsCupsHr: function() {
+    return this.cupHr / 20
+  },
+  totLbs: function() {
+    return this.beanHr + this.lbsCupsHr;
+  }
 }
+
 
 var seaTac = {
   storeName: 'Seattle Tacoma Airport',
@@ -79,7 +126,23 @@ var seaTac = {
   custHour: function(minHr, maxHr) {
     return Math.floor(Math.random() * (maxHr - minHr +1)) + minHr;
   },
+  customerNumHr: function() {
+    return this.custHour(this.minHr, this.maxHr);
+  },
+  cupHr: function() {
+    return this.customerNumHr * this.cupCust;
+  },
+  beanHr: function() {
+    return this.customerNumHr * this.lbCust;
+  },
+  lbsCupsHr: function() {
+    return this.cupHr / 20
+  },
+  totLbs: function() {
+    return this.beanHr + this.lbsCupsHr;
+  }
 }
+
 
 var website = {
   storeName: 'Website Sales',
@@ -91,7 +154,23 @@ var website = {
   custHour: function(minHr, maxHr) {
     return Math.floor(Math.random() * (maxHr - minHr +1)) + minHr;
   },
+  customerNumHr: function() {
+    return this.custHour(this.minHr, this.maxHr);
+  },
+  cupHr: function() {
+    return this.customerNumHr * this.cupCust;
+  },
+  beanHr: function() {
+    return this.customerNumHr * this.lbCust;
+  },
+  lbsCupsHr: function() {
+    return this.cupHr / 20
+  },
+  totLbs: function() {
+    return this.beanHr + this.lbsCupsHr;
+  }
 }
+
 
 //create array of stores
 var stores = [pike, capHill, spl, slu, seaTac, website];
@@ -102,8 +181,8 @@ calculations = function(shopName){
   for (j = 0; j < shopName.hours.length; j ++){
     //calculate needed stats for one hour
     shopName.customerNumHr = shopName.custHour(shopName.minHr, shopName.maxHr);
-    shopName.cupHr = shopName.customer * shopName.cupCust; // cups of coffee sold per hour
-    shopName.beanHr = shopName.customer * shopName.lbCust; // lbs of beans sold per hour
+    shopName.cupHr = shopName.customerNumHr * shopName.cupCust; // cups of coffee sold per hour
+    shopName.beanHr = shopName.customerNumHr * shopName.lbCust; // lbs of beans sold per hour
     shopName.lbsCupsHr = shopName.cupHr / 20;
     shopName.totLbs = shopName.beanHr + shopName.lbsCupsHr; // total beans for this hour
 
