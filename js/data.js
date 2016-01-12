@@ -97,17 +97,20 @@ var toTables = function () {
     trEl.appendChild(thEl);
   }
 
-  //display one row of regular data
+// Display cofee data
+for (var i = 0; i < allHours.length; i++) {
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
-  thEl.textContent = allHours[0];
+  thEl.textContent = allHours[i];
   trEl.appendChild(thEl);
   for (var j = 0; j < (allStores.length); j++) {
     var tdEl = document.createElement('td');
-    tdEl.textContent = allStores[j].beansEachHour[0].toFixed(1);
+    tdEl.textContent = allStores[j].beansEachHour[i].toFixed(1);
     trEl.appendChild(tdEl)
   }
   tableEl.appendChild(trEl);
+
+}
 
 
   document.body.appendChild(tableEl);
