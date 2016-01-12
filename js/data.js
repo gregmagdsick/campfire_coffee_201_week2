@@ -80,6 +80,9 @@ var toTables = function () {
   var h2El = document.createElement('h2');
   h2El.textContent = 'Bean Forecast Data';
   document.body.appendChild(h2El);
+  var paragraphEl = document.createElement('p');
+  paragraphEl.textContent = 'All values are in pounds';
+  document.body.appendChild(paragraphEl);
   //make the table
   var tableEl = document.createElement('table');
 
