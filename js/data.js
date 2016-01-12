@@ -1,5 +1,5 @@
 //my JS will go here//
-var allHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm', '9:00pm']
+var allHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm']
 
 
 
@@ -7,18 +7,21 @@ var allHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '1
 var pike = {
   storeName: 'Pike Place Market',
   hours: allHours,
+  customerHours: [],
+  cupsEachHour: [],
   minHr: 14,
   maxHr: 55,
   cupCust: 1.2,
   lbCust: 3.7,
-  custHour: function(minHr, maxHr) {
-    return Math.floor(Math.random() * (maxHr - minHr +1)) + minHr;
+  custHour: function() {
+    for (var i = 0; i < this.hours.length; i ++) {
+      this.customerHours[i] = Math.floor(Math.random() * (this.maxHr - this.minHr +1)) + this.minHr;
+    }
   },
-  customerNumHr: function() {
-    return this.custHour(this.minHr, this.maxHr);
-  },
-  cupHr: function() {
-    return this.customerNumHr * this.cupCust;
+  cupsPerHr: function() {
+    for (var i = 0; i < this.hours.length; i ++) {
+    this.cupsEachHour[i] = this.customerHours[i] * this.cupCust;
+  }
   },
   beanHr: function() {
     return this.customerNumHr * this.lbCust;
@@ -28,8 +31,59 @@ var pike = {
   },
   totLbs: function() {
     return this.beanHr + this.lbsCupsHr;
-  }
+  },
+  calculations: function() {
+
+      //populate to website
+      var paragraphEl = document.createElement('p');
+      paragraphEl.textContent = this.hours[j] + ': ' + this.totLbs.toFixed(1) + ' lbs [' + this.customerNumHr.toFixed(1) + ' customers, ' + this.cupHr.toFixed(1) + ' cups (' + this.lbsCupsHr.toFixed(1) + ' lbs), ' + this.beanHr.toFixed(1) + ' lbs to go]';
+      document.body.appendChild(paragraphEl);
+
+      }
+
+
 }
+
+pike.custHour();
+console.log(pike.customerHours);
+pike.cupsPerHr();
+console.log(pike.cupsEachHour);
+
+//create array of stores
+var stores = [pike, capHill, spl, slu, seaTac, website];
+
+
+//iterate through each store
+// for (var i = 0; i < stores.length; i++) {
+//   var h2El = document.createElement('h2');
+//   h2El.textContent = stores[i].storeName;
+//   document.body.appendChild(h2El);
+//   calculations(stores[i]);
+// }
+// calculations = function(shopName){
+//   for (j = 0; j < shopName.hours.length; j ++){
+//     //calculate needed stats for one hour
+//     shopName.customerNumHr = shopName.custHour(shopName.minHr, shopName.maxHr);
+//     shopName.cupHr = shopName.customerNumHr * shopName.cupCust; // cups of coffee sold per hour
+//     shopName.beanHr = shopName.customerNumHr * shopName.lbCust; // lbs of beans sold per hour
+//     shopName.lbsCupsHr = shopName.cupHr / 20;
+//     shopName.totLbs = shopName.beanHr + shopName.lbsCupsHr; // total beans for this hour
+//
+//     //populate to website
+//     var paragraphEl = document.createElement('p');
+//     paragraphEl.textContent = shopName.hours[j] + ': ' + shopName.totLbs.toFixed(1) + ' lbs [' + shopName.customerNumHr.toFixed(1) + ' customers, ' + shopName.cupHr.toFixed(1) + ' cups (' + shopName.lbsCupsHr.toFixed(1) + ' lbs), ' + shopName.beanHr.toFixed(1) + ' lbs to go]';
+//     document.body.appendChild(paragraphEl);
+//
+//     }
+//   }
+//
+// //iterate through each store
+// for (var i = 0; i < stores.length; i++) {
+//   var h2El = document.createElement('h2');
+//   h2El.textContent = stores[i].storeName;
+//   document.body.appendChild(h2El);
+//   calculations(stores[i]);
+// }
 
 
 
@@ -172,32 +226,5 @@ var website = {
 }
 
 
-//create array of stores
-var stores = [pike, capHill, spl, slu, seaTac, website];
-
 
 //make all neccesary calculations for each individual store
-calculations = function(shopName){
-  for (j = 0; j < shopName.hours.length; j ++){
-    //calculate needed stats for one hour
-    shopName.customerNumHr = shopName.custHour(shopName.minHr, shopName.maxHr);
-    shopName.cupHr = shopName.customerNumHr * shopName.cupCust; // cups of coffee sold per hour
-    shopName.beanHr = shopName.customerNumHr * shopName.lbCust; // lbs of beans sold per hour
-    shopName.lbsCupsHr = shopName.cupHr / 20;
-    shopName.totLbs = shopName.beanHr + shopName.lbsCupsHr; // total beans for this hour
-
-    //populate to website
-    var paragraphEl = document.createElement('p');
-    paragraphEl.textContent = shopName.hours[j] + ': ' + shopName.totLbs.toFixed(1) + ' lbs [' + shopName.customerNumHr.toFixed(1) + ' customers, ' + shopName.cupHr.toFixed(1) + ' cups (' + shopName.lbsCupsHr.toFixed(1) + ' lbs), ' + shopName.beanHr.toFixed(1) + ' lbs to go]';
-    document.body.appendChild(paragraphEl);
-
-  }
-}
-
-//iterate through each store
-for (var i = 0; i < stores.length; i++) {
-  var h2El = document.createElement('h2');
-  h2El.textContent = stores[i].storeName;
-  document.body.appendChild(h2El);
-  calculations(stores[i]);
-}
