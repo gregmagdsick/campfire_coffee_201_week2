@@ -15,25 +15,25 @@ var Store = function(storeName, minHr, maxHr, cupCust, lbCust){
   this.dailyCups = 0;
   this.dailyBeans = 0;
 
-  custHour = function() {
+  this.custHour = function() {
     for (var i = 0; i < this.hours.length; i ++) {
       this.customerHours[i] = Math.floor(Math.random() * (this.maxHr - this.minHr +1)) + this.minHr;
     }
   };
-  cupsPerHr = function() {
+  this.cupsPerHr = function() {
     for (var i = 0; i < this.hours.length; i ++) {
     this.cupsEachHour[i] = this.customerHours[i] * this.cupCust;
     this.dailyCups += this.cupsEachHour[i];
     this.dailyBeans += this.cupsEachHour[i]/20;
   }
 };
-  beanHr = function() {
+  this.beanHr = function() {
     for (var i = 0; i < this.hours.length; i ++) {
     this.beansEachHour[i] = this.customerHours[i] * this.lbCust;
     this.dailyBeans += this.beansEachHour[i];
   }
 };
-  populate = function() {
+  this.populate = function() {
     this.custHour();
     this.cupsPerHr();
     this.beanHr();
