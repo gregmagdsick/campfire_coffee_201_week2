@@ -1,7 +1,6 @@
 /* color scheme based off of Dark Sunset https://color.adobe.com/Dark-Sunset-color-theme-2629114/ */
 /*actual color scheme http://paletton.com/palette.php?uid=30j0u0kqPvKgEHLlR-Evjrvy3ly*/
-
 body {
+  color: black;
   background-color: #FD7129;
-  background-image: "img/campsite-tent-night.jpg";
 }
