@@ -110,12 +110,21 @@ for (var i = 0; i < allHours.length; i++) {
     var tdEl = document.createElement('td');
     tdEl.textContent = allStores[j].beansEachHour[i].toFixed(1);
     trEl.appendChild(tdEl)
+    }
+  tableEl.appendChild(trEl);
+  }
+
+  // Display toTables
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  trEl.appendChild(thEl);
+  thEl.textContent = 'Totals:';
+  for (var i = 0; i < allStores.length; i++) {
+    var thEl = document.createElement('th');
+    thEl.textContent = allStores[i].dailyBeans.toFixed(1);
+    trEl.appendChild(thEl);
   }
   tableEl.appendChild(trEl);
-
-}
-
-
   document.body.appendChild(tableEl);
 }
 
