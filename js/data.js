@@ -114,7 +114,7 @@ for (var i = 0; i < allHours.length; i++) {
   tableEl.appendChild(trEl);
   }
 
-  // Display toTables
+  // Display dailyBeans in table
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   trEl.appendChild(thEl);
@@ -125,6 +125,23 @@ for (var i = 0; i < allHours.length; i++) {
     trEl.appendChild(thEl);
   }
   tableEl.appendChild(trEl);
+
+  //Display total beans needed for the day for all stores
+  var totalDailyBeans = 0;
+  for (var i = 0; i < allStores.length; i++) {
+    totalDailyBeans += allStores[i].dailyBeans;
+    console.log(totalDailyBeans);
+  }
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'All Stores total:'
+  trEl.appendChild(thEl);
+  var thEl = document.createElement('th');
+  thEl.textContent = totalDailyBeans.toFixed(1);
+  trEl.appendChild(thEl);
+  tableEl.appendChild(trEl);
+
+
   document.body.appendChild(tableEl);
 }
 
