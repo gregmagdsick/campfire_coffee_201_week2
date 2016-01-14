@@ -15,6 +15,7 @@ var Store = function(storeName, minHr, maxHr, cupCust, lbCust){
   this.lbCust = lbCust;
   this.dailyCups = 0;
   this.dailyBeans = 0;
+  this.dailyBeansToSell = 0;
   allStores.push(this);
 
   this.custHour = function() {
@@ -33,6 +34,7 @@ var Store = function(storeName, minHr, maxHr, cupCust, lbCust){
     for (var i = 0; i < this.hours.length; i ++) {
     this.beansEachHour[i] = this.customerHours[i] * this.lbCust;
     this.dailyBeans += this.beansEachHour[i];
+    this.dailyBeansToSell += this.beansEachHour[i];
   }
 };
   this.populate = function() {
@@ -68,24 +70,104 @@ var website = new Store('Website Sales', 3, 6, 0, 6.7);
 //   allStores[i].populate();
 // };
 
-
-var toTables = function () {
+var displayForecast = function () {
   //calculate data
   for (var i = 0; i < allStores.length; i++) {
     allStores[i].custHour();
     allStores[i].cupsPerHr();
     allStores[i].beanHr();
   }
+  allBeansToday();
+  beansSellBrewToday();
+  beansPerHour();
+}
+
+var makeTitleTable = function(title,subtitle) {
   //make the title
   var h2El = document.createElement('h2');
-  h2El.textContent = 'Bean Forecast Data';
+  h2El.textContent = title;
   document.body.appendChild(h2El);
   var paragraphEl = document.createElement('p');
-  paragraphEl.textContent = 'All values are in pounds';
+  paragraphEl.textContent = subtitle;
   document.body.appendChild(paragraphEl);
   //make the table
   var tableEl = document.createElement('table');
+}
 
+//creates table for total beans needed today for all stores
+var allBeansToday = function() {
+  makeTitleTable('Beans needed for today', 'data is in lbs')
+  var totalDailyBeans = 0;
+  for (var i = 0; i < allStores.length; i++) {
+    totalDailyBeans += allStores[i].dailyBeans;
+  }
+  var tableEl = document.createElement('table');
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'All Stores total:'
+  trEl.appendChild(thEl);
+  var thEl = document.createElement('th');
+  thEl.textContent = Math.round(totalDailyBeans);
+  trEl.appendChild(thEl);
+  tableEl.appendChild(trEl);
+  document.body.appendChild(tableEl);
+}
+
+var beansSellBrewToday = function () {
+  makeTitleTable('Beans for each store by type','All values are in pounds');
+  var tableEl = document.createElement('table');
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'Store Name';
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+  thEl.textContent = 'lbs to sell';
+  trEl.appendChild(thEl);
+  thEl =document.createElement('th');
+  thEl.textContent = 'lbs to brew';
+  trEl.appendChild(thEl);
+  tableEl.appendChild(trEl);
+
+//variables for total beans across all stores
+  allStoresBeansSell = 0;
+  allStoresBeansBrew = 0;
+
+  for (i = 0; i < allStores.length; i++) {
+    trEl = document.createElement('tr');
+    var tdEl = document.createElement('td');
+    tdEl.textContent = allStores[i].storeName;
+    trEl.appendChild(tdEl);
+    tdEl = document.createElement('td');
+    tdEl.textContent = allStores[i].dailyBeansToSell.toFixed(1);
+    trEl.appendChild(tdEl);
+    tdEl = document.createElement('td');
+    tdEl.textContent = (allStores[i].dailyCups/20).toFixed(1);
+    trEl.appendChild(tdEl);
+    tableEl.appendChild(trEl);
+    allStoresBeansSell += allStores[i].dailyBeansToSell;
+    allStoresBeansBrew += allStores[i].dailyCups/20;
+  }
+  trEl = document.createElement('tr');
+  thEl = document.createElement('th');
+  thEl.textContent = 'Totals:';
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+  thEl.textContent = Math.round(allStoresBeansSell);
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+  thEl.textContent = Math.round(allStoresBeansBrew);
+  trEl.appendChild(thEl);
+  tableEl.appendChild(trEl);
+
+  document.body.appendChild(tableEl);
+}
+
+//creates big list of total beans needed per hour
+var beansPerHour = function () {
+  //make the title
+  makeTitleTable('Beans Per Hour Forecast Data', 'All values are in pounds');
+
+  var tableEl = document.createElement('table');
 
   //display the header row of the table
   var trEl = document.createElement('tr');
@@ -114,7 +196,7 @@ for (var i = 0; i < allHours.length; i++) {
   tableEl.appendChild(trEl);
   }
 
-  // Display toTables
+  // Display dailyBeans in table
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   trEl.appendChild(thEl);
@@ -125,7 +207,9 @@ for (var i = 0; i < allHours.length; i++) {
     trEl.appendChild(thEl);
   }
   tableEl.appendChild(trEl);
+
+
+
   document.body.appendChild(tableEl);
 }
-
-toTables();
+displayForecast();
