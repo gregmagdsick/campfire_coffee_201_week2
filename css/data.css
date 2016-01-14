@@ -4,3 +4,13 @@ body {
   color: black;
   background-color: #FD7129;
 }
+
+table, td, th, tr {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 2px;
+}
+
+p {
+  font-size: small;
+}

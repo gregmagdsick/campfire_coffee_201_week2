@@ -107,7 +107,7 @@ var allBeansToday = function() {
   thEl.textContent = 'All Stores total:'
   trEl.appendChild(thEl);
   var thEl = document.createElement('th');
-  thEl.textContent = totalDailyBeans.toFixed(1);
+  thEl.textContent = Math.round(totalDailyBeans);
   trEl.appendChild(thEl);
   tableEl.appendChild(trEl);
   document.body.appendChild(tableEl);
