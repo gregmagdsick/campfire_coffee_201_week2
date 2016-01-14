@@ -8,5 +8,22 @@
   <body>
     <script type="text/javascript" src="js/data.js"></script>
     <section id='test'></section>
+
+    <form id ="new-store">
+      <fieldset>
+        <legend> Add a new store</legend>
+        <label for="location">location name: </label>
+        <input name="location" type="text"/>
+        <lable for="minHr">min Cust/Hr</lable>
+        <input name="minHr" type="number"min="0"step="1">
+       <lable  for="maxHr">max cust/Hr</lable>
+      <input name="maxHr" type="number"min="0"step="1">
+      <lable for="cupCust"> cups/cust</lable>
+      <input name="cupCust"type= "number"min="0"step="0.1">
+      <lable for="lbCust">lbs/cust</lable>
+      <input name="lbCust" type="number"min="0"step="0.1">
+    </fieldset>
+    </form>
+
   </body>
 </html>
