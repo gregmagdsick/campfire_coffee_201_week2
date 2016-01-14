@@ -213,3 +213,28 @@ for (var i = 0; i < allHours.length; i++) {
   document.body.appendChild(tableEl);
 }
 displayForecast();
+
+
+// ++++++++++++++Form Submisson Section++++++++++++++++++++
+// setting up variable for DOM access of the form
+var storeForm = document.getElementById('new-store');
+
+//Define the event handler
+function addNewStore(event) {
+  console.log(event);
+  event.preventDefault(); //prevents page reload
+
+  var newStore = new Store(event.target.newlocation.value, event.target.minHr.value,
+    event.target.maxHr.value, event.target.cupCust.value, event.target.lbCust.value);
+  console.log('new store created:' + event.target.newlocation.value);
+  console.log('allStores: ' + allStores);
+  // event.target.locaton.value = null;
+  // event.target.minHr.value = null;
+  // event.target.maxHr.value = null;
+  // event.target.cupCust.value = null;
+  // event.target.lbCust.value = null;
+  displayForecast();
+}
+
+// event listener for 'add store button'
+storeForm.addEventListener('submit', addNewStore);
