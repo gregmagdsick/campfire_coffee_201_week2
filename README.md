@@ -5,3 +5,5 @@ Building a website based off of instructor specs to learn to dynamically generat
 
 Built functions to calculate beans needed from the 'marketing data' given
 Displays data in table form on the data.html page
+update 1/14/2016 gurpreet was the driver for this update.
+                 added html for new store submission form to Data.html.
