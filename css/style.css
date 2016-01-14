@@ -6,6 +6,10 @@ body {
 
 }
 
+/** {
+  border: 1px solid black;
+}*/
+
 h1  {
   display: inline;
   font-family: 'Amatic SC', cursive;
@@ -20,7 +24,7 @@ nav {
   clear: both;
   float: right;
   display: inline;
-  font-family: 'Amatic SC', cursive;
+  font-family: 'Covered By Your Grace', cursive;
   padding: 3px;
 }
 
@@ -31,10 +35,6 @@ nav li {
   margin: 1px;
   font-size: large;
   border-width: 0px;
-}
-
-section {
-
 }
 
 .main {
@@ -53,12 +53,21 @@ section {
   margin-bottom: 15px;
 }
 
+/*.narrative  {
+  max-width: 500px;
+  align: center;
+}*/
+
 h3 p {
   display: inline;
 }
 
+.test {
+  background-color: #389600;
+}
 
 .family {
   float: left;
   margin-right: 15px;
+  background-color: #389600;
 }

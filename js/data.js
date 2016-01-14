@@ -79,7 +79,7 @@ var displayForecast = function () {
   }
   allBeansToday();
   beansSellBrewToday();
-  beansPerHour();
+  customersPerHour();
 }
 
 var makeTitleTable = function(title,subtitle) {
@@ -163,9 +163,9 @@ var beansSellBrewToday = function () {
 }
 
 //creates big list of total beans needed per hour
-var beansPerHour = function () {
+var customersPerHour = function () {
   //make the title
-  makeTitleTable('Beans Per Hour Forecast Data', 'All values are in pounds');
+  makeTitleTable('Customers Per Hour Forecast Data', '');
 
   var tableEl = document.createElement('table');
 
@@ -190,7 +190,7 @@ for (var i = 0; i < allHours.length; i++) {
   trEl.appendChild(thEl);
   for (var j = 0; j < (allStores.length); j++) {
     var tdEl = document.createElement('td');
-    tdEl.textContent = allStores[j].beansEachHour[i].toFixed(1);
+    tdEl.textContent = Math.round(allStores[j].customerHours[i]);
     trEl.appendChild(tdEl)
     }
   tableEl.appendChild(trEl);
@@ -203,7 +203,7 @@ for (var i = 0; i < allHours.length; i++) {
   thEl.textContent = 'Totals:';
   for (var i = 0; i < allStores.length; i++) {
     var thEl = document.createElement('th');
-    thEl.textContent = allStores[i].dailyBeans.toFixed(1);
+    thEl.textContent = Math.round(allStores[i].dailyBeans);
     trEl.appendChild(thEl);
   }
   tableEl.appendChild(trEl);
