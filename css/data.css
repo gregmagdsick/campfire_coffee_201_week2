@@ -14,3 +14,15 @@ table, td, th, tr {
 p {
   font-size: small;
 }
+
+label {
+  display: block;
+}
+
+input {
+  display: block;
+}
+
+form {
+  width: 20%;
+}

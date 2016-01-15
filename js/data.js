@@ -56,6 +56,9 @@ var Store = function(storeName, minHr, maxHr, cupCust, lbCust){
   };
 };
 
+//set up variable for DOM access for table writing
+var table_spot = document.getElementById('data');
+
 //Creating each Store
 var pike = new Store('Pike Place Market', 14, 55, 1.2, 3.7);
 var capHill = new Store('Capitol Hill', 32, 38, 3.2, 0.4);
@@ -77,6 +80,7 @@ var displayForecast = function () {
     allStores[i].cupsPerHr();
     allStores[i].beanHr();
   }
+
   allBeansToday();
   beansSellBrewToday();
   customersPerHour();
@@ -86,17 +90,17 @@ var makeTitleTable = function(title,subtitle) {
   //make the title
   var h2El = document.createElement('h2');
   h2El.textContent = title;
-  document.body.appendChild(h2El);
+  table_spot.appendChild(h2El);
   var paragraphEl = document.createElement('p');
   paragraphEl.textContent = subtitle;
-  document.body.appendChild(paragraphEl);
-  //make the table
-  var tableEl = document.createElement('table');
+  table_spot.appendChild(paragraphEl);
 }
 
 //creates table for total beans needed today for all stores
 var allBeansToday = function() {
   makeTitleTable('Beans needed for today', 'data is in lbs')
+  //make the table
+  var tableEl = document.createElement('table');
   var totalDailyBeans = 0;
   for (var i = 0; i < allStores.length; i++) {
     totalDailyBeans += allStores[i].dailyBeans;
@@ -110,11 +114,13 @@ var allBeansToday = function() {
   thEl.textContent = Math.round(totalDailyBeans);
   trEl.appendChild(thEl);
   tableEl.appendChild(trEl);
-  document.body.appendChild(tableEl);
+  table_spot.appendChild(tableEl);
 }
 
 var beansSellBrewToday = function () {
   makeTitleTable('Beans for each store by type','All values are in pounds');
+  //make the table
+  var tableEl = document.createElement('table');
   var tableEl = document.createElement('table');
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
@@ -159,14 +165,13 @@ var beansSellBrewToday = function () {
   trEl.appendChild(thEl);
   tableEl.appendChild(trEl);
 
-  document.body.appendChild(tableEl);
+  table_spot.appendChild(tableEl);
 }
 
 //creates big list of total beans needed per hour
 var customersPerHour = function () {
   //make the title
   makeTitleTable('Customers Per Hour Forecast Data', '');
-
   var tableEl = document.createElement('table');
 
   //display the header row of the table
@@ -210,6 +215,32 @@ for (var i = 0; i < allHours.length; i++) {
 
 
 
-  document.body.appendChild(tableEl);
+  table_spot.appendChild(tableEl);
 }
 displayForecast();
+
+
+// ++++++++++++++Form Submisson Section++++++++++++++++++++
+// setting up variable for DOM access of the form
+var storeForm = document.getElementById('new-store');
+
+//Define the event handler
+function addNewStore(event) {
+  console.log(event);
+  event.preventDefault(); //prevents page reload
+
+  var newStore = new Store(event.target.newlocation.value, Number(event.target.minHr.value),
+    Number(event.target.maxHr.value), Number(event.target.cupCust.value), Number(event.target.lbCust.value));
+  console.log('new store created:' + event.target.newlocation.value);
+  console.log('allStores: ' + allStores);
+  event.target.newlocation.value = null;
+  event.target.minHr.value = null;
+  event.target.maxHr.value = null;
+  event.target.cupCust.value = null;
+  event.target.lbCust.value = null;
+  table_spot.innerHTML = '';
+  displayForecast();
+}
+
+// event listener for 'add store button'
+storeForm.addEventListener('submit', addNewStore);
