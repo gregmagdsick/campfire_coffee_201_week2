@@ -7,3 +7,5 @@ Built functions to calculate beans needed from the 'marketing data' given
 Displays data in table form on the data.html page
 update 1/14/2016 gurpreet was the driver for this update.
                  added html for new store submission form to Data.html.
+
+                 on my own I added an add store form that adds the store to the list, and re-creates the tables including the new store.
