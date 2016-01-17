@@ -6,10 +6,6 @@ body {
 
 }
 
-/** {
-  border: 1px solid black;
-}*/
-
 h1  {
   display: inline;
   font-family: 'Amatic SC', cursive;
@@ -38,36 +34,25 @@ nav li {
 }
 
 .main {
-  text-align: center;
-  align-self: center;
-  margin: 100;
-  position: relative;
-  /*left: 25%;*/
-  /*top: 100px;*/
+  /*margin: 100;
+  position: relative;*/
   height: 500px;
   background-image: url("../img/campsite-tent-night.jpg");
   background-size: cover;
   background-color: #4279B3;
-  width: 100%;
+  /*width: 100%;*/
   color: white;
   margin-bottom: 15px;
 }
 
-/*.narrative  {
-  max-width: 500px;
-  align: center;
-}*/
-
-h3 p {
-  display: inline;
+.two.columns.hide {
+  visibility: hidden;
 }
 
-.test {
+.green {
   background-color: #389600;
 }
 
-.family {
-  float: left;
-  margin-right: 15px;
-  background-color: #389600;
+.center {
+  text-align: center;
 }
