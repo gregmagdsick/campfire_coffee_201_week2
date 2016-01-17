@@ -105,7 +105,6 @@ var allBeansToday = function() {
   for (var i = 0; i < allStores.length; i++) {
     totalDailyBeans += allStores[i].dailyBeans;
   }
-  var tableEl = document.createElement('table');
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   thEl.textContent = 'All Stores total:'
@@ -121,7 +120,6 @@ var beansSellBrewToday = function () {
   makeTitleTable('Beans for each store by type','All values are in pounds');
   //make the table
   var tableEl = document.createElement('table');
-  var tableEl = document.createElement('table');
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   thEl.textContent = 'Store Name';
@@ -129,7 +127,7 @@ var beansSellBrewToday = function () {
   thEl = document.createElement('th');
   thEl.textContent = 'lbs to sell';
   trEl.appendChild(thEl);
-  thEl =document.createElement('th');
+  thEl = document.createElement('th');
   thEl.textContent = 'lbs to brew';
   trEl.appendChild(thEl);
   tableEl.appendChild(trEl);
