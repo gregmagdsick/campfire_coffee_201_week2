@@ -2,7 +2,17 @@
 /*actual color scheme http://paletton.com/palette.php?uid=30j0u0kqPvKgEHLlR-Evjrvy3ly*/
 body {
   color: black;
-  background-color: #FD7129;
+  background-color: #4279B3;
+}
+
+h1  {
+  display: inline;
+  font-family: 'Amatic SC', cursive;
+  vertical-align:top;
+  font-size: 90px;
+  clear: both;
+  padding: 0px;
+  margin: 0px;
 }
 
 table, td, th, tr {
