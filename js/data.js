@@ -213,8 +213,6 @@ for (var i = 0; i < allHours.length; i++) {
   }
   tableEl.appendChild(trEl);
 
-
-
   table_spot.appendChild(tableEl);
 }
 displayForecast();
